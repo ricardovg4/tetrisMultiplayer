@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100vw;
+    background-color: #282c34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#title {
+    margin-bottom: 2em;
+    color: #fff;
+}
+
+.game-container__grid {
+    display: flex;
+    width: 200px;
+    height: 400px;
+    background-color: #3f4044;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.game-container__square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.507);
+    background: rgb(110, 23, 23);
+}
+
+.painted {
+    background-color: black;
+    border: 1px solid rgba(110, 23, 23, 0.712);
+}
+
+.set {
+    background-color: rgb(32, 19, 19);
+    border: 1px solid rgba(110, 23, 23, 0.712);
+}
+
+#score-points {
+    color: #fff;
+    margin-bottom: 1em;
+}
+
+#reload {
+    background-color: rgb(216, 214, 214);
+    border: none;
+    padding: 0.7em;
+    margin-bottom: 1em;
+}
+
+.instructions {
+    margin: 2em;
+    width: 30em;
+}
+
+.instructions > p {
+    color: rgb(179, 179, 179);
+    line-height: 1.5em;
+    text-align: center;
+}

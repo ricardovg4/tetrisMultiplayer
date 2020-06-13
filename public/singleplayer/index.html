@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Tetris</title>
+    </head>
+    <body>
+        <h1 id="title">Game on!</h1>
+        <button id="reload">Try again</button>
+        <div class="score">
+            <h3 id="score-points">Score: <span id="points"></span></h3>
+        </div>
+        <div class="game-container">
+            <div class="game-container__grid"></div>
+        </div>
+        <div class="instructions">
+            <p>
+                Use the arrows keys to move the tetrominoes. <strong>Up</strong> to
+                <strong>rotate</strong>, <strong>left/right </strong> for
+                <strong>horizontal movement </strong> and <strong>down </strong> to move the
+                tetromino <strong>down</strong>.
+            </p>
+        </div>
+        <script type="text/javascript" src="tetrominoes.js"></script>
+        <script type="text/javascript" src="index.js"></script>
+    </body>
+</html>
