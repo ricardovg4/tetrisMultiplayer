@@ -1,0 +1,139 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100vw;
+    background-color: #282c34;
+    color: rgb(179, 179, 179);
+    font-size: 16px;
+}
+
+/* remove decoration for anchor links */
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.section {
+    height: 100%;
+}
+
+.section--username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.big-prompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.big-prompt__form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.notification {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+}
+
+.big-prompt__title {
+    font-size: 3em;
+    margin-bottom: 2.5rem;
+}
+
+.big-prompt__input {
+    margin-right: 1em;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid rgb(179, 179, 179);
+    padding-bottom: 0.2em;
+    text-align: center;
+    width: 50%;
+    min-width: 300px;
+    outline: none;
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+}
+
+.section--selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection {
+    flex: 0 0 60%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* border: 1px solid red; */
+    font-size: 1rem;
+}
+
+.selection__item {
+    /* border: 1px solid #fff; */
+    flex: 0 0 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection__separator {
+    flex: 0 0 10%;
+    position: relative;
+}
+
+.attention {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+.big-prompt__title--medium {
+    font-size: 2em;
+    margin-bottom: 2rem;
+}
+
+.button {
+    background: rgba(172, 172, 172, 0.863);
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    width: 250px;
+    outline: none;
+}
+
+.button:active {
+    background-color: rgba(255, 255, 255, 0.877);
+}
+
+.button--small {
+    width: 50px;
+    background-color: rgb(201, 201, 201);
+}

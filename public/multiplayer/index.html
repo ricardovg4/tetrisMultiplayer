@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TetDivs Multiplayer!</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <section class="section section--username">
+            <div class="big-prompt">
+                <h2 class="big-prompt__title">Choose a username!</h2>
+                <form type="text" class="big-prompt__form">
+                    <label for="username" style="display: none;">Username</label>
+                    <input
+                        name="username"
+                        id="username"
+                        class="big-prompt__input"
+                        type="text"
+                        placeholder="Type here..."
+                    />
+                    <button id="submit-button" class="button button--small" type="submit">
+                        Go!
+                    </button>
+                </form>
+                <h3 class="notification"></h3>
+            </div>
+        </section>
+        <section class="section section--selection" style="display: none;">
+            <div class="selection">
+                <div class="selection__item"><button class="button">Create a room</button></div>
+                <div class="selection__separator"><span class="attention">or</span></div>
+                <div class="selection__item">
+                    <div class="big-prompt">
+                        <h2 class="big-prompt__title big-prompt__title--medium">
+                            Join (with a code)
+                        </h2>
+                        <input
+                            type="text"
+                            class="big-prompt__input"
+                            placeholder="Insert room's code..."
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>
