@@ -15,7 +15,8 @@ const usersDb = new Datastore({ filename: './db/users.db' });
 const roomsDb = new Datastore({ filename: './db/rooms.db' });
 //utils
 const { newUser, userLeave } = require('./utils/users');
-
+const { createRoomRequest, findRoom } = require('./utils/rooms');
+const { resolveNaptr } = require('dns');
 //load databases
 usersDb.loadDatabase();
 roomsDb.loadDatabase();
@@ -23,7 +24,34 @@ roomsDb.loadDatabase();
 //bodyparser initialization
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// multiplayer query string
+app.get('/multiplayer', (req, res) => {
+    console.log(req.query);
+    // first check if there are query strings for a room
+    if (Object.entries(req.query).length !== 0) {
+        findRoom(req.query.room, roomsDb, (docs) => {
+            // if the room is found and active in the roomsDB then redirects
+            if (docs.length !== 0) {
+                // sends to multiplayer and saves the room in sessionStorage
+                res.sendFile(path.join(__dirname), '/public/multiplayer/index.html');
+                io.on('connection', (socket) => {
+                    socket.join(req.query.room);
+                    const doc = docs[0];
+                    socket.emit('roomGuest', { room: doc.room, as: 'guest', _id: doc._id });
+                });
+            } else {
+                // if the room is not found, redirect to home, add a message later on
+                res.redirect('/');
+            }
+        });
+        // if there are no qs, redirect to multiplayer
+    } else {
+        res.sendFile(path.join(__dirname), 'public/multiplayer/index.html');
+    }
+});
+
 //Serving static files
+//will probably replace this with appget and sendfile
 app.use('/', express.static(path.join(__dirname, 'public/home')));
 app.use('/singleplayer', express.static(path.join(__dirname, 'public/singleplayer')));
 app.use('/multiplayer', express.static(path.join(__dirname, 'public/multiplayer')));
@@ -35,42 +63,32 @@ app.use(function (req, res, next) {
 
 //Run when a client connects
 io.on('connection', (socket) => {
-    // socket.emit('new message', socket.id);
-    // socket.on('keypress', (ele) => {
-    //     console.log(`${socket.id} says: ${ele}, ${socket.username}`);
-    //     console.log(socket.handshake.headers.referer);
-    // });
-
     //run when the client sends a newuser, checks the db and adds if not there
     socket.on('newUser', (username) => newUser(socket, username, usersDb));
     socket.on('disconnect', () => userLeave(socket.username, usersDb));
+    //should also include the client's timeout, otherwise the user is not deleted
+    socket.on('createRoomRequest', () => createRoomRequest(socket, roomsDb));
+    socket.on('sendMessage', (data) => {
+        socket.to(data.room).emit('newMessage', data);
+    });
 });
 
 server.listen(port, () => {
     console.log(`Server listening at port ${port}`);
 });
 
-// app.use('/user/:id', function (req, res, next) {
-//     console.log('Request Type:', req.method);
-//     next();
-// });
-
 // app.get('/users/:userId/books/:bookId', (req, res) => {
 // res.send(req.params);
 // res.download('test.txt');
 // });
 
-//multiplayer username post request
-// app.post('/multiplayer', (req, res) => {
-//     res.redirect('back');
-//     const { username } = req.body;
-//     //add username to db if it doesn't exist
-//     usersDb.find({ username: username }, (err, docs) => {
-//         console.log(docs);
-//         if (docs.length === 0 && username.length < 10) {
-//             usersDb.insert({ username: username });
+// app.get('/multiplayer/:room', (req, res) => {
+//     findRoom(req.params.room, roomsDb, (docs) => {
+//         if (docs.length !== 0) {
+//             res.send('yay!');
+//             // res.redirect('/multiplayer');
 //         } else {
-//             console.log('already exists');
+//             res.send('room not found!');
 //         }
 //     });
 // });

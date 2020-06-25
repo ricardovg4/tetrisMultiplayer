@@ -4,7 +4,7 @@ function newUser(socket, username, database) {
             database.insert({ username: username });
             socket.username = username;
             //add section to emit a newusersuccess event to the client
-            socket.emit('newUserSuccess', `${username} has been added`);
+            socket.emit('newUserSuccess', username);
         } else {
             console.log('already exists');
             socket.emit('notification', `the username ${username} already exists!`);

@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <section class="section section--username">
+        <section class="section section--username" style="">
             <div class="big-prompt">
                 <h2 class="big-prompt__title">Choose a username!</h2>
                 <form type="text" class="big-prompt__form">
@@ -18,8 +18,9 @@
                         class="big-prompt__input"
                         type="text"
                         placeholder="Type here..."
+                        autofocus
                     />
-                    <button id="submit-button" class="button button--small" type="submit">
+                    <button id="button-username" class="button button--small" type="submit">
                         Go!
                     </button>
                 </form>
@@ -28,7 +29,9 @@
         </section>
         <section class="section section--selection" style="display: none;">
             <div class="selection">
-                <div class="selection__item"><button class="button">Create a room</button></div>
+                <div class="selection__item">
+                    <button id="button-room" class="button">Create a room</button>
+                </div>
                 <div class="selection__separator"><span class="attention">or</span></div>
                 <div class="selection__item">
                     <div class="big-prompt">
@@ -43,6 +46,34 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section class="section section--pre-lobby" style="display: none;">
+            <div class="room">
+                <div class="room__item">
+                    <p id="room-code" class="room__item__p">room code:</p>
+                </div>
+                <div class="room__item">
+                    <p id="room-link" class="room_item__p">Or share:</p>
+                </div>
+            </div>
+            <div class="waiting">
+                <h3 class="waiting__item">Waiting for 2nd player...</h3>
+            </div>
+        </section>
+        <section class="section section--lobby" style="display: none;">
+            <div class="chat">
+                <div class="chat__messages">
+                    <ul class="messages"></ul>
+                </div>
+                <input
+                    id="chat-input"
+                    type="text"
+                    class="chat__input"
+                    placeholder="type here..."
+                    autofocus
+                />
+            </div>
+            <button class="button button-start">Start the match!</button>
         </section>
         <script src="/socket.io/socket.io.js" type="text/javascript"></script>
         <script src="./index.js"></script>
